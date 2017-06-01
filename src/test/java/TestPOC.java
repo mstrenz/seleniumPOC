@@ -25,7 +25,7 @@ public class TestPOC{
 
     @Test
     public void testOne(){
-        assertEquals("https://www.google.com", testDriver.getCurrentUrl());
+        assertEquals("https://www.google.com/", testDriver.getCurrentUrl());
     }
 
     @AfterClass
