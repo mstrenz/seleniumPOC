@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-import static junit.framework.TestCase.assertFalse;
+import static org.junit.Assert.assertEquals;
 
 public class TestPOC{
     public static RemoteWebDriver testDriver;
@@ -13,9 +13,9 @@ public class TestPOC{
 
     @BeforeClass
     public static void setup(){
-        System.setProperty("webdriver.chrome.driver", "lib/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "lib/chromedriver");
         testDriver = new ChromeDriver();
-        testDriver.get("https://www.readytalk.com");
+        testDriver.get("https://www.google.com");
     }
 
     @Before
@@ -25,7 +25,7 @@ public class TestPOC{
 
     @Test
     public void testOne(){
-        assertFalse("Nav Not Found", testDriver.findElementById("nav_container").isDisplayed());
+        assertEquals("https://www.google.com", testDriver.getCurrentUrl());
     }
 
     @AfterClass
