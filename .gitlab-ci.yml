@@ -1,0 +1,9 @@
+image:
+  name: circleci/openjdk:10-jdk-browsers
+
+stages:
+  - test
+
+ui-test:
+  stage: test
+  scripts: ./runTest.sh
