@@ -15,7 +15,7 @@ dependencies{
 }
 
 tasks.withType(Test) {
-    include '**/Test*.*'
+    useJUnitPlatform()
     testLogging.exceptionFormat = 'full'
     testLogging {
         events "passed", "failed", "standardOut"
