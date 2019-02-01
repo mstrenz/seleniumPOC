@@ -21,6 +21,10 @@ public class ScreenShotOnFailure implements AfterEachCallback {
     }
 
     void captureScreenShot(String fileName) throws IOException {
+        File directory = new File("screenshots");
+        if(!directory.exists()){
+            directory.mkdir();
+        }
         File scrFile = ((TakesScreenshot) TestOne.driver).getScreenshotAs(OutputType.FILE);
         File targetFile = new File("screenshots/" + fileName + ".png");
         copy(scrFile, targetFile);
