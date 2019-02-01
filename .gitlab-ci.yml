@@ -1,5 +1,5 @@
 image:
-  name: circleci/openjdk:10-jdk-browsers
+  name: circleci/openjdk:11-jdk-browsers
 
 stages:
   - test

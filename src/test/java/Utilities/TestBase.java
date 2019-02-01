@@ -1,7 +1,8 @@
+package Utilities;
 
+import Pages.GooglePage;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -11,13 +12,11 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-
-public class TestPOC{
+public class TestBase {
     private static ChromeDriverService service;
-    public static RemoteWebDriver testDriver;
-    protected static Logger logger = LoggerFactory.getLogger(TestPOC.class);
+    public static RemoteWebDriver driver;
+    protected static Logger logger = LoggerFactory.getLogger(TestBase.class);
+    protected static GooglePage google;
 
 
     @BeforeAll
@@ -36,20 +35,16 @@ public class TestPOC{
 
         //Get Driver
         ChromeOptions options = new ChromeOptions();
-        testDriver = new RemoteWebDriver(service.getUrl(), options);
-        testDriver.get("https://www.google.com");
-    }
+        driver = new RemoteWebDriver(service.getUrl(), options);
 
-
-    @Test
-    public void testOne(){
-        logger.info("TESTING GOOGLE");
-        assertEquals("https://www.google.com/", testDriver.getCurrentUrl());
+        //Initialize Pages
+        google = new GooglePage(driver);
     }
 
     @AfterAll
-    public static void tearDown(){
-        testDriver.quit();
+    //Teardown driver after each test
+    public static void tearDown() {
+        driver.quit();
+        service.stop();
     }
-
 }
