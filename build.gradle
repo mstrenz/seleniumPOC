@@ -15,20 +15,33 @@ dependencies{
             'org.slf4j:slf4j-log4j12:1.7.25',
             'log4j:log4j:1.2.17',
 		    )
-
 }
 
 test {
-    failFast = true
-    maxParallelForks 4
     useJUnitPlatform()
 }
 
 tasks.withType(Test) {
-    systemProperties  System.properties
+    if(project.hasProperty("testRun")){
+        systemProperty "testRun", project.getProperty("testRun")
+    }
+    failFast = true
+    maxParallelForks 4
     testLogging.exceptionFormat = 'full'
     testLogging {
         events "passed", "failed", "standardOut"
+    }
+}
+
+task pass(type: Test){
+    useJUnitPlatform(){
+        includeTags 'pass'
+    }
+}
+
+task fail(type: Test){
+    useJUnitPlatform(){
+        includeTags 'fail'
     }
 }
 

@@ -1,6 +1,6 @@
-package Utilities;
+package com.example.test.utilities;
 
-import Pages.GooglePage;
+import com.example.test.pages.GooglePage;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.chrome.ChromeDriverService;
@@ -10,17 +10,24 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Properties;
 
 public class TestBase {
     private static ChromeDriverService service;
     public static RemoteWebDriver driver;
     protected static Logger logger = LoggerFactory.getLogger(TestBase.class);
     protected static GooglePage google;
+    public static Properties props = new Properties();
 
 
     @BeforeAll
-    public static void setup(){
+    public static void setup() throws IOException {
+        props.load(new FileInputStream("src/test/resources/env.properties"));
+        String testRun = System.getProperty("testRun", props.getProperty("default.testrun"));
+
         if(System.getProperty("os.name").contains("Mac")){
             System.setProperty("webdriver.chrome.driver", "lib/chromedriverMac");
         }else{
@@ -44,6 +51,7 @@ public class TestBase {
 
         //Initialize Pages
         google = new GooglePage(driver);
+        logger.info(testRun);
     }
 
     @AfterAll

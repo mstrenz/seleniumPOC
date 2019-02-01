@@ -9,6 +9,6 @@ ui-test:
   script: ./runTest.sh
   artifacts:
     paths:
-      - logs
-      - screenshots
+      - logs/
+      - screenshots/
     expire_in: 30 days

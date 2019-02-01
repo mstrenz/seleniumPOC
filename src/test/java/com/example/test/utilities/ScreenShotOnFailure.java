@@ -1,6 +1,5 @@
-package Utilities;
+package com.example.test.utilities;
 
-import Tests.TestOne;
 import org.junit.jupiter.api.extension.AfterEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.openqa.selenium.OutputType;
@@ -25,7 +24,7 @@ public class ScreenShotOnFailure implements AfterEachCallback {
         if(!directory.exists()){
             directory.mkdir();
         }
-        File scrFile = ((TakesScreenshot) TestOne.driver).getScreenshotAs(OutputType.FILE);
+        File scrFile = ((TakesScreenshot) TestBase.driver).getScreenshotAs(OutputType.FILE);
         File targetFile = new File("screenshots/" + fileName + ".png");
         copy(scrFile, targetFile);
     }
