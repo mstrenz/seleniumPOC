@@ -21,7 +21,11 @@ public class TestBase {
 
     @BeforeAll
     public static void setup(){
-        System.setProperty("webdriver.chrome.driver", "lib/chromedriver");
+        if(System.getProperty("os.name").contains("mac")){
+            System.setProperty("webdriver.chrome.driver", "lib/chromedriverMac");
+        }else{
+            System.setProperty("webdriver.chrome.driver", "lib/chromedriverLinux");
+        }
         //Configure Chromedriver
         service = new ChromeDriverService.Builder()
                 .usingDriverExecutable(new File("lib/chromedriver"))
