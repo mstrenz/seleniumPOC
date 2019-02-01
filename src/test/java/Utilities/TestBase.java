@@ -21,14 +21,15 @@ public class TestBase {
 
     @BeforeAll
     public static void setup(){
-        if(System.getProperty("os.name").contains("mac")){
+        if(System.getProperty("os.name").contains("Mac")){
             System.setProperty("webdriver.chrome.driver", "lib/chromedriverMac");
         }else{
             System.setProperty("webdriver.chrome.driver", "lib/chromedriverLinux");
         }
+
         //Configure Chromedriver
         service = new ChromeDriverService.Builder()
-                .usingDriverExecutable(new File("lib/chromedriver"))
+                .usingDriverExecutable(new File(System.getProperty("webdriver.chrome.driver")))
                 .usingAnyFreePort()
                 .build();
         try {
