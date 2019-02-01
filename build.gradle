@@ -11,12 +11,21 @@ dependencies{
 		    'org.seleniumhq.selenium:selenium-java:3.141.59',
             'org.junit.jupiter:junit-jupiter-api:5.3.2',
             'org.junit.jupiter:junit-jupiter-engine:5.3.1',
+            'org.slf4j:slf4j-api:1.7.25',
+            'org.slf4j:slf4j-log4j12:1.7.25',
+            'log4j:log4j:1.2.17',
 		    )
 
 }
 
-tasks.withType(Test) {
+test {
+    failFast = true
+    maxParallelForks 4
     useJUnitPlatform()
+}
+
+tasks.withType(Test) {
+    systemProperties  System.properties
     testLogging.exceptionFormat = 'full'
     testLogging {
         events "passed", "failed", "standardOut"
