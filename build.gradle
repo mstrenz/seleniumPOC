@@ -8,8 +8,9 @@ repositories {
 
 dependencies{
 	testCompile(
-		    'org.seleniumhq.selenium:selenium-java:3.3.1',
-		    'junit:junit:4.12'
+		    'org.seleniumhq.selenium:selenium-java:3.141.59',
+            'org.junit.jupiter:junit-jupiter-api:5.3.2',
+            'org.junit.jupiter:junit-jupiter-engine:5.3.1',
 		    )
 
 }
@@ -21,10 +22,5 @@ tasks.withType(Test) {
         events "passed", "failed", "standardOut"
     }
 }
-
-task wrapper(type: Wrapper) {
-	gradleVersion = '3.5'
-}
-
 
 	

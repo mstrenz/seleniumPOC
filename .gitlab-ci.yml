@@ -6,4 +6,4 @@ stages:
 
 ui-test:
   stage: test
-  scripts: ./runTest.sh
+  script: ./runTest.sh
