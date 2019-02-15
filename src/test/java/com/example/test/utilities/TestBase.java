@@ -1,5 +1,6 @@
 package com.example.test.utilities;
 
+import com.api.test.utilities.ApiBase;
 import com.example.test.pages.GooglePage;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -14,19 +15,14 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-public class TestBase {
+public class TestBase extends ApiBase {
     private static ChromeDriverService service;
     public static RemoteWebDriver driver;
-    protected static Logger logger = LoggerFactory.getLogger(TestBase.class);
     protected static GooglePage google;
-    public static Properties props = new Properties();
 
 
     @BeforeAll
-    public static void setup() throws IOException {
-        props.load(new FileInputStream("src/test/resources/env.properties"));
-        String testRun = System.getProperty("testRun", props.getProperty("default.testrun"));
-
+    public static void startWebdriver() {
         if(System.getProperty("os.name").contains("Mac")){
             System.setProperty("webdriver.chrome.driver", "lib/chromedriverMac");
         }else{
@@ -50,7 +46,6 @@ public class TestBase {
 
         //Initialize Pages
         google = new GooglePage(driver);
-        logger.info(testRun);
     }
 
     @AfterAll
