@@ -10,13 +10,13 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(ScreenShotOnFailure.class)
+@DisplayName("Passing Tests")
 public class TestOne extends TestBase {
 
     @Test
-    @Tag("pass")
-    @DisplayName("This is an example of a passing test")
+    @Tag("smoke")
+    @DisplayName("should pass")
     public void testPass(){
-        logger.info("Passing Test");
         google.goTo();
         assertEquals("https://www.google.com/", driver.getCurrentUrl());
     }
