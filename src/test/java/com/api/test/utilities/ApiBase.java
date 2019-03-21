@@ -1,7 +1,7 @@
 package com.api.test.utilities;
 
 
-import com.example.test.utilities.TestBase;
+import com.ui.test.utilities.TestBase;
 import com.github.restdriver.serverdriver.http.response.Response;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.chrome.ChromeDriverService;

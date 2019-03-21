@@ -1,10 +1,9 @@
-package com.example.test.tests;
+package com.ui.test.tests;
 
-import com.example.test.utilities.ScreenShotOnFailure;
-import com.example.test.utilities.TestBase;
+import com.ui.test.utilities.ScreenShotOnFailure;
+import com.ui.test.utilities.TestBase;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 

@@ -41,7 +41,6 @@ public class TestApi extends ApiBase {
     }
 
     @Test
-    @Disabled
     @DisplayName("checks multiple assertions at once")
     public void assertAllTests(){
         assertAll("tests",

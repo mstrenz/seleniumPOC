@@ -1,4 +1,4 @@
-package com.example.test.utilities;
+package com.ui.test.utilities;
 
 import org.junit.jupiter.api.extension.AfterEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;

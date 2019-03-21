@@ -1,7 +1,7 @@
-package com.example.test.tests;
+package com.ui.test.tests;
 
-import com.example.test.utilities.ScreenShotOnFailure;
-import com.example.test.utilities.TestBase;
+import com.ui.test.utilities.ScreenShotOnFailure;
+import com.ui.test.utilities.TestBase;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -18,6 +18,7 @@ public class TestOne extends TestBase {
     @DisplayName("should pass")
     public void testPass(){
         google.goTo();
-        assertEquals("https://www.google.com/", driver.getCurrentUrl());
+        google.getSearchInput().sendKeys("Testing");
+        assertEquals("Testing", google.getSearchInput().getAttribute("value"));
     }
 }

@@ -1,19 +1,15 @@
-package com.example.test.utilities;
+package com.ui.test.utilities;
 
 import com.api.test.utilities.ApiBase;
-import com.example.test.pages.GooglePage;
+import com.ui.test.pages.GooglePage;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Properties;
 
 public class TestBase extends ApiBase {
 
