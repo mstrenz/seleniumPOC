@@ -1,40 +1,32 @@
-package com.example.test.utilities;
+package com.ui.test.utilities;
 
-import com.example.test.pages.GooglePage;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
+import com.api.test.utilities.ApiBase;
+import com.ui.test.pages.GooglePage;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Properties;
 
-public class TestBase {
-    private static ChromeDriverService service;
-    public static RemoteWebDriver driver;
-    protected static Logger logger = LoggerFactory.getLogger(TestBase.class);
+public class TestBase extends ApiBase {
+
     protected static GooglePage google;
-    public static Properties props = new Properties();
 
 
     @BeforeAll
-    public static void setup() throws IOException {
+    public static void setup(TestInfo testInfo) throws IOException {
+        testName = "UI Test " + testInfo.getDisplayName();
         props.load(new FileInputStream("src/test/resources/env.properties"));
-        String testRun = System.getProperty("testRun", props.getProperty("default.testrun"));
 
+        //Configure Chromedriver
         if(System.getProperty("os.name").contains("Mac")){
             System.setProperty("webdriver.chrome.driver", "lib/chromedriverMac");
         }else{
             System.setProperty("webdriver.chrome.driver", "lib/chromedriverLinux");
         }
-
-        //Configure Chromedriver
         service = new ChromeDriverService.Builder()
                 .usingDriverExecutable(new File(System.getProperty("webdriver.chrome.driver")))
                 .usingAnyFreePort()
@@ -51,12 +43,11 @@ public class TestBase {
 
         //Initialize Pages
         google = new GooglePage(driver);
-        logger.info(testRun);
     }
 
     @AfterAll
     //Teardown driver after each test
-    public static void tearDown() {
+    public static void stop() {
         driver.quit();
         service.stop();
     }

@@ -9,40 +9,59 @@ repositories {
 dependencies{
 	testCompile(
 		    'org.seleniumhq.selenium:selenium-java:3.141.59',
-            'org.junit.jupiter:junit-jupiter-api:5.3.2',
-            'org.junit.jupiter:junit-jupiter-engine:5.3.1',
+            'org.junit.jupiter:junit-jupiter-api:5.4.0',
+            'org.junit.jupiter:junit-jupiter-engine:5.4.0',
             'org.slf4j:slf4j-api:1.7.25',
             'org.slf4j:slf4j-log4j12:1.7.25',
             'log4j:log4j:1.2.17',
-		    )
-}
-
-test {
-    useJUnitPlatform()
+            'com.github.rest-driver:rest-server-driver:2.0.0'
+    )
 }
 
 tasks.withType(Test) {
-    if(project.hasProperty("testRun")){
-        systemProperty "testRun", project.getProperty("testRun")
-    }
     failFast = true
     maxParallelForks 4
     testLogging.exceptionFormat = 'full'
     testLogging {
         events "passed", "failed", "standardOut"
     }
+    if(project.hasProperty("baseUrl")){
+        systemProperty "baseUrl", project.getProperty("baseUrl")
+    }
+    systemProperty "secret", project.getProperty("secret")
 }
 
-task pass(type: Test){
+test {
+    description("This will run all tests found")
+    useJUnitPlatform()
+}
+
+
+task smoke(type: Test){
+    description("This will run a subset of tests by tag")
     useJUnitPlatform(){
-        includeTags 'pass'
+        includeTags 'smoke'
     }
 }
 
-task fail(type: Test){
+task ui(type: Test){
+    description("This will run ui tests only")
     useJUnitPlatform(){
-        includeTags 'fail'
+        excludeTags 'api'
     }
 }
 
-	
+task regression(type: Test){
+    description("This will run api tests first followed by ui")
+    dependsOn('api')
+    useJUnitPlatform(){
+        excludeTags 'api'
+    }
+}
+
+task api(type: Test){
+    description("This will run api level tests")
+    useJUnitPlatform(){
+        includeTags 'api'
+    }
+}
